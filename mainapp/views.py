@@ -44,3 +44,15 @@ def createPost(request):
 def deletePost(request, post_id):
     Post.objects.get(id=post_id).delete()
     return redirect("dashboard")
+
+
+def editPost(request, post_id):
+    post = Post.objects.get(id=post_id)
+    # print(post)
+    if(request.method == "POST"):
+        post.title = request.POST["title"]
+        post.desctiption = request.POST["description"]
+        post.save()
+        return redirect("dashboard")
+
+    return render(request, "edit_post.html", {"post": post})

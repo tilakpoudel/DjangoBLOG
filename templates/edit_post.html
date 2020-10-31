@@ -12,21 +12,21 @@
   </head>
   <body>
     <div class="container">
-        <a href="{% url 'create_post' %}" class="btn btn-success mt-2">Create Post</a>
-        <h1 class="text-center">Posts</h1>
+        <a href="{% url 'dashboard' %}" class="btn btn-danger mt-2">GO Back</a>
+        <h1 class="text-center">Edit Posts</h1>
         <hr>
-        {% for post in posts %}
-        <div class="bg-dark text-center text-white">
-          <h3 class="text-center">{{post.title| default:"NA"}}</h3>
-          <p class="lead">{{ post.desctiption| default:"NA" }}</p>
-          <a href="{% url 'edit_post' post.id %}" class="btn btn-primary mb-2">Edit Post</a>
 
-          <a href="{% url 'delete_post' post.id %}" class="btn btn-danger mb-2">Delete Post</a>
-        </div>
-        <br>
-        {% empty %}
-        <h2 class="text-center text-danger">No posts yet.!!!</h2>
-        {% endfor %}
+        <form action="" class="form-group" method="POST">
+            {% csrf_token %}
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" value="{{ post.title }}" placeholder="Post Title" class="form-control" > 
+
+            <label for="description">Description:</label>
+            <textarea name="description" id="" cols="30" rows="10" placeholder="Post Description" class="form-control">{{ post.desctiption| default:"NA" }}</textarea>
+
+            <center><button type="submit" class="btn btn-block btn-outline-primary mt-5 text-center">Post</button></center>
+        </form>
+
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
